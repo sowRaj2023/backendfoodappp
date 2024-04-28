@@ -1,10 +1,10 @@
 send req
 
-get http://localhost:3007/
+get http://localhost:3004/
 
 send req
 
-post http://localhost:3007/user
+post http://localhost:3004/user
 Content-Type: application/json
 {
     "name":"sondharya",
