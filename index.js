@@ -34,7 +34,7 @@ initializeDbAndServer();
 
 //get user API
 
-app.get("/", async (request, response) =>{
+app.get("/user/", async (request, response) =>{
 
     const getUserQuery = `
     select
@@ -50,36 +50,34 @@ app.get("/", async (request, response) =>{
 
 //Register API
 
-app.post("/user", async (request,response) => {
-  const {username,name,password,gender,location} = request.body;
-  const hashedPassword = await bcrypt.hash(password,10)
+app.post("/register", async (request,response) =>{
+  const{username,name,password,gender,location} = request.body;
+  const hashedPassword = await bcrypt.hash(password, 12);
   const selectUserQuery = `
   select
   *
   from
   userDb
   where
-  username = '${username}'`;
-  const dbUser = await db.get(selectUserQuery);
+  username = '${username}';`;
+  const dbData = await db.get(selectUserQuery);
 
-  if(dbUser === undefined){
-    //create new
-    const createNewUser = `
+  if(dbData===undefined){
+    //create new user
+    const createNewUser = 
+    `
     insert into
     userDb (username,name,password,gender,location)
-    values
-    (
-        '${username}',
-        '${name}',
-        '${hashedPassword}',
-        '${gender}',
-        '${location}',
-    );`;
+    values(
+    '${username}',
+    '${name}',
+    '${hashedPassword}',
+    '${gender}',
+    '${location}')`;
     await db.run(createNewUser);
-    response.send("Created Successfully");
+    response.send("created successfully");
   }else{
-    //already exit
-    response.status(400);
-    response.send("User Already Exist");
+    //user already exist
+    response.status(400).send("user already exist");
   }
 });
