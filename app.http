@@ -1,0 +1,40 @@
+GET http://localhost:3004/user
+
+
+###
+
+POST http://localhost:3004/register
+Content-Type: application/json
+
+{
+    "username": "sowndharyaR",
+    "name": "sowrajasekar",
+    "password": "sowndharyaR",
+    "gender": "female",
+    "location": "bangalore"
+}
+
+
+###
+
+POST http://localhost:3004/login
+Content-Type: application/json
+
+{
+    "username" : "sowndharyaR",
+    "password" : "sowndharyaR"
+}
+
+###
+
+GET http://localhost:3004/
+
+
+
+###
+
+GET http://localhost:3004/prime
+
+
+###
+GET http://localhost:3004/menu
